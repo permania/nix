@@ -9,6 +9,6 @@
     ./mod/system.nix
   ];
 
-  networking.hostName = "Br";
+  networking.hostName = "neptune";
   system.stateVersion = "25.05";
 }

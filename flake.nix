@@ -16,7 +16,7 @@
     pkgs = nixpkgs.packages.${system};
   in
   {
-    nixosConfigurations."Br" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."neptune" = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
