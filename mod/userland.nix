@@ -3,6 +3,8 @@
   # Packages
   environment.systemPackages = with pkgs; [
     home-manager
+
+    alsa-utils
   ];
 
   # Services
