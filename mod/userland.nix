@@ -3,6 +3,7 @@
   # Packages
   environment.systemPackages = with pkgs; [
     home-manager
+    nix-search-cli
 
     alsa-utils
   ];
