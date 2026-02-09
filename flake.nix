@@ -10,7 +10,7 @@
           nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs:
+  outputs = { nixpkgs, nix-colors, ... }@inputs:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.packages.${system};
