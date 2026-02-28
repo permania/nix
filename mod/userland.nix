@@ -9,7 +9,10 @@
   ];
 
   # Services
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "wpa_supplicant";
+  };
 
   # Fingerprint
   services."06cb-009a-fingerprint-sensor" = {                                 
