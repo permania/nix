@@ -18,6 +18,25 @@
     options = [ "subvol=@home" "compress=zstd" "ssd" "discard=async" ];
   };
 
+  boot = {
+    plymouth = {
+      enable = true;
+      theme = "blahaj";
+      themePackages = with pkgs; [
+        plymouth-blahaj-theme
+      ];
+    };
+
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+    ];
+    loader.timeout = 0;
+  };
+
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
