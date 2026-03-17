@@ -60,6 +60,14 @@
   # Services
   services.openssh.enable = true;
 
+  services.avahi = {
+    enable = true;
+    publish.enable = true;
+    publish.userServices = true;
+  };
+  networking.firewall.allowedTCPPorts = [ 9757 ];
+  networking.firewall.allowedUDPPorts = [ 9757 ];
+
   # Nix Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
