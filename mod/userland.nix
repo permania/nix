@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }: {
-
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Packages
   environment.systemPackages = with pkgs; [
     home-manager
@@ -15,22 +18,22 @@
   };
 
   # Fingerprint
-  services."06cb-009a-fingerprint-sensor" = {                                 
-	  enable = true;                                                            
-	  backend = "python-validity";                                              
-  };   
+  services."06cb-009a-fingerprint-sensor" = {
+    enable = true;
+    backend = "python-validity";
+  };
 
   security.pam.services = {
-	  sudo.fprintAuth = true;
-	  login.fprintAuth = true;
+    sudo.fprintAuth = true;
+    login.fprintAuth = true;
   };
   #
 
   services.keyd = {
     enable = true;
     keyboards.default = {
-      ids = [ "*" ];
-      settings = { main = { capslock = "overload(control, esc)"; }; };
+      ids = ["*"];
+      settings = {main = {capslock = "overload(control, esc)";};};
     };
   };
 
@@ -47,10 +50,11 @@
   services.xserver = {
     enable = true;
     windowManager.qtile = {
-	    enable = true;
-	    extraPackages = python3Packages: with python3Packages; [
-		    qtile-extras
-	    ];
+      enable = true;
+      extraPackages = python3Packages:
+        with python3Packages; [
+          qtile-extras
+        ];
     };
     displayManager.startx.enable = true;
     displayManager.lightdm.enable = false;

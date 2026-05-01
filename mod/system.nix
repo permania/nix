@@ -1,21 +1,24 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-57af3897-06bb-4e24-b1a8-006a62d52c3e".device =
-    "/dev/disk/by-uuid/57af3897-06bb-4e24-b1a8-006a62d52c3e";
+  boot.initrd.luks.devices."luks-57af3897-06bb-4e24-b1a8-006a62d52c3e".device = "/dev/disk/by-uuid/57af3897-06bb-4e24-b1a8-006a62d52c3e";
 
   fileSystems."/" = lib.mkForce {
     device = "/dev/mapper/luks-cb1542e8-824a-42ad-baf9-c9bf80f3c6e7";
     fsType = "btrfs";
-    options = [ "subvol=@" "compress=zstd" "ssd" "discard=async" ];
+    options = ["subvol=@" "compress=zstd" "ssd" "discard=async"];
   };
 
   fileSystems."/home" = lib.mkForce {
     device = "/dev/mapper/luks-cb1542e8-824a-42ad-baf9-c9bf80f3c6e7";
     fsType = "btrfs";
-    options = [ "subvol=@home" "compress=zstd" "ssd" "discard=async" ];
+    options = ["subvol=@home" "compress=zstd" "ssd" "discard=async"];
   };
 
   boot = {
@@ -55,7 +58,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Packages
-  environment.systemPackages = with pkgs; [ brightnessctl ];
+  environment.systemPackages = with pkgs; [brightnessctl];
 
   # Services
   services.openssh.enable = true;
@@ -65,22 +68,36 @@
     publish.enable = true;
     publish.userServices = true;
   };
-  networking.firewall.allowedTCPPorts = [ 9757 ];
-  networking.firewall.allowedUDPPorts = [ 9757 ];
+  networking.firewall.allowedTCPPorts = [9757];
+  networking.firewall.allowedUDPPorts = [9757];
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = false;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
 
   # Nix Features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Admin User
   users.users.corn = {
     isNormalUser = true;
     description = "corn";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
+    extraGroups = ["networkmanager" "wheel"];
+    packages = with pkgs; [];
   };
 
   security.sudo = {
-	  enable = true;
-	  extraConfig = "Defaults timestamp_timeout=0";
+    enable = true;
+    extraConfig = "Defaults timestamp_timeout=0";
   };
 }
