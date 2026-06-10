@@ -62,6 +62,7 @@
 
   # Services
   services.openssh.enable = true;
+  services.openssh.settings.X11Forwarding = true;
 
   services.avahi = {
     enable = true;
@@ -98,6 +99,6 @@
 
   security.sudo = {
     enable = true;
-    extraConfig = "Defaults timestamp_timeout=0";
+    # extraConfig = "Defaults timestamp_timeout=0";
   };
 }

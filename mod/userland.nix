@@ -19,7 +19,7 @@
 
   # Fingerprint
   services."06cb-009a-fingerprint-sensor" = {
-    enable = true;
+    enable = false;
     backend = "python-validity";
   };
 
