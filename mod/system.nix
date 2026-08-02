@@ -58,7 +58,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Packages
-  environment.systemPackages = with pkgs; [brightnessctl];
+  environment.systemPackages = with pkgs; [nh brightnessctl];
 
   # Services
   services.openssh.enable = true;
@@ -99,6 +99,5 @@
 
   security.sudo = {
     enable = true;
-    extraConfig = "Defaults timestamp_timeout=0";
   };
 }
