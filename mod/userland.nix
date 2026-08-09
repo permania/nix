@@ -50,7 +50,7 @@
   services.xserver = {
     enable = true;
     windowManager.qtile = {
-      enable = true;
+      enable = false;
       extraPackages = python3Packages:
         with python3Packages; [
           qtile-extras
